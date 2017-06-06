@@ -24,8 +24,8 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static("public"));
 
 
-if(process.env.MONGOD_URI){
-  mongoose.connect(process.env.MONGOD_URI);
+if(process.env.MONGODB_URI){
+  mongoose.connect(process.env.MONGODB_URI);
 }else{
   // Database configuration with mongoose
   mongoose.connect("mongodb://localhost/myArticles");
