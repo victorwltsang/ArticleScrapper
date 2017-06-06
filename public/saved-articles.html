@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+  <head>
+    <meta charset="UTF-8">
+    <title>LifeHacker Scrapper</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+  </head>
+
+  <body>
+    <header>
+      <nav class="green darken-1">
+        <div class="nav-wrapper wrapper">
+          <a href="/" class="brand-logo">LifeHacker Scraper</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">Menu</i></a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="/">HOME</a></li>
+            <li><a href="saved-articles">SAVED ARTICLES</a></li>
+            <li><a class="waves-effect waves-light btn light-blue darken-4" href="scrape">SAVE NEW ARTICLES!</a></li>
+          </ul>
+          <ul class="side-nav" id="mobile-demo">
+            <li><a href="/">HOME</a></li>
+            <li><a href="saved-articles">SAVED ARTICLES</a></li>
+            <li><a href="scrape">SAVE NEW ARTICLES!</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <div class="wrapper">
+      <div id="articles" class="flex-cards"></div>
+      <div id="notes" class="z-depth-4"></div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+    <script src="app.js"></script>
+  </body>
+
+</html>

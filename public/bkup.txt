@@ -1,0 +1,9 @@
+var saveModal = '<div id="saveNoteModal" class="modal"><div class="modal-content">';
+saveModal += "<h4>" + data.title + "</h4><hr/>";
+saveModal += "<input id='titleinput' name='title' >";
+saveModal += "<textarea id='bodyinput' name='body'></textarea>"
+saveModal += '</div><div class="modal-footer">';
+saveModal += "<a class='modal-action modal-close waves-effect waves-green btn-flat' data-id='" + data._id + "' id='savenote'>Save Note</button>";
+saveModal += '</div></div>';
+
+$("#notes").append(saveModal);

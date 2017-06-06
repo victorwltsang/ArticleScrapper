@@ -1,0 +1,54 @@
+.wrapper {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#articles {
+  margin: 3% 0;
+}
+
+#notes {
+  width: 50%;
+  padding: 20px;
+  position: absolute;
+  top: 15%;
+  left: 25%;
+  background-color: white;
+  border-radius: 3px;
+  z-index: 1;
+  display: none;
+}
+
+@media screen and (min-width:768px) {
+  .flex-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .myCards {
+    flex: 0 1 48%;
+    display: flex;
+  }
+  .card {
+    display: flex;
+    flex: 1 0;
+    flex-direction: column;
+  }
+  .card-action, .card-content {
+    display: flex;
+    flex: 1 0;
+  }
+}
+
+@media screen and (min-width:426px) {
+  .card-action a:last-child {
+    margin-left: 5%;
+  }
+}
+
+@media screen and (max-width:426px) {
+  .card-action a:last-child {
+    margin-top: 5%;
+  }
+}
