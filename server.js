@@ -23,8 +23,15 @@ app.use(bodyParser.urlencoded({extended: false}));
 // Make public a static dir
 app.use(express.static("public"));
 
-// Database configuration with mongoose
-mongoose.connect("mongodb://localhost/myArticles");
+
+if(process.env.MONGOD_URI){
+  mongoose.connect(process.env.MONGOD_URI);
+}else{
+  // Database configuration with mongoose
+  mongoose.connect("mongodb://localhost/myArticles");
+}
+
+
 var db = mongoose.connection;
 
 // Show any mongoose errors
