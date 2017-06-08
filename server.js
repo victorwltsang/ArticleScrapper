@@ -23,14 +23,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 // Make public a static dir
 app.use(express.static("public"));
 
-
-if(process.env.MONGODB_URI){
+if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI);
-}else{
+} else {
   // Database configuration with mongoose
   mongoose.connect("mongodb://localhost/myArticles");
 }
-
 
 var db = mongoose.connection;
 
@@ -75,7 +73,7 @@ app.get("/scrape", function(req, res) {
       entry.save(function(err, doc) {
         // Log any errors
         if (err) {
-          console.log(err// Or log the doc
+          console.log(err // Or log the doc
           );
         } else {
           console.log(doc);
@@ -94,7 +92,7 @@ app.get("/articles", function(req, res) {
   Article.find({}, function(error, doc) {
     // Log any errors
     if (error) {
-      console.log(error// Or send the doc to the browser as a json object
+      console.log(error // Or send the doc to the browser as a json object
       );
     } else {
       res.json(doc);
@@ -104,10 +102,12 @@ app.get("/articles", function(req, res) {
 
 app.get("/savedArticles", function(req, res) {
   // Grab every doc in the Articles array
-  Article.find({"saved":true}, function(error, doc) {
+  Article.find({
+    "saved": true
+  }, function(error, doc) {
     // Log any errors
     if (error) {
-      console.log(error// Or send the doc to the browser as a json object
+      console.log(error // Or send the doc to the browser as a json object
       );
     } else {
       res.json(doc);
@@ -117,7 +117,7 @@ app.get("/savedArticles", function(req, res) {
 
 app.get("/saved-articles", function(req, res) {
   // Grab every doc in the Articles array
-res.sendFile(path.join(__dirname, "public/saved-articles.html"));
+  res.sendFile(path.join(__dirname, "public/saved-articles.html"));
 });
 
 app.get("/marksaved/:id", function(req, res) {
@@ -169,12 +169,12 @@ app.get("/articles/:id", function(req, res) {
   // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
   Article.findOne({"_id": req.params.id})
   // ..and populate all of the notes associated with it
-    .populate("note")
+    .populate("notes")
   // now, execute our query
     .exec(function(error, doc) {
     // Log any errors
     if (error) {
-      console.log(error// Otherwise, send the doc to the browser as a json object
+      console.log(error // Otherwise, send the doc to the browser as a json object
       );
     } else {
       res.json(doc);
@@ -191,13 +191,15 @@ app.post("/articles/:id", function(req, res) {
   newNote.save(function(error, doc) {
     // Log any errors
     if (error) {
-      console.log(error// Otherwise
+      console.log(error // Otherwise
       );
     } else {
       // Use the article id to find and update it's note
       Article.findOneAndUpdate({
         "_id": req.params.id
-      }, {"note": doc._id})
+      },{ $push : {
+        "notes": doc._id
+      }})
       // Execute the above query
         .exec(function(err, doc) {
         // Log any errors

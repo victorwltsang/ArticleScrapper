@@ -90,23 +90,28 @@ $(document).on("click", ".note", function() {
   // With that done, add the note information to the page
     .done(function(data) {
     console.log(data);
-    // The title of the article
-    $("#notes").append("<h5>" + data.title + "</h5>");
+
+
     // A textarea to add a new note body
     $("#notes").append("<textarea id='bodyinput' name='body'></textarea>");
     // A button to submit a new note, with the id of the article saved to it
     $("#notes").append("<a class='waves-effect waves-light btn'  data-id='" + data._id + "' id='savenote'>Save Note</a>");
+    $("#notes").append("<a class='waves-effect waves-light btn red lighten-1 close margin-left'>Close Note</a>");
+
+    // If there's a note in the article
+    if (data.notes.length > 0) {
+      var comment = "";
+      // Place the body of the note in the body textarea
+      $("#bodyinput").val(data.notes[0].body);
+
+      for(var i = 0; i < data.notes.length; i++){
+        comment += "<div class='comment' data-id='" + data._id + "'>" + data.notes[i].body + "</div>";
+      }
+      $("#notes").append(comment);
+    }
 
     $("#notes").show();
 
-
-
-    // If there's a note in the article
-    if (data.note) {
-
-      // Place the body of the note in the body textarea
-      $("#bodyinput").val(data.note.body);
-    }
   });
 });
 
@@ -137,4 +142,11 @@ $(document).on("click", "#savenote", function() {
   // Also, remove the values entered in the input and textarea for note entry
 
   $("#bodyinput").val("");
+});
+
+
+$(document).on("click", ".close", function() {
+  // Grab the id associated with the article from the submit button
+  $("#notes").hide();
+
 });
