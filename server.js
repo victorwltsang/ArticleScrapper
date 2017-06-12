@@ -214,6 +214,21 @@ app.post("/articles/:id", function(req, res) {
   });
 });
 
+
+app.post("/delnote/:id", function(req, res) {
+  // Create a new note and pass the req.body to the entry
+  console.log(req.params.id);
+  Note.remove({ _id: req.params.id }, function(err,doc) {
+    if (err) {
+      console.log(err);
+    } else {
+      // Or send the document to the browser
+      res.send(doc);
+    }
+});
+
+});
+
 // Listen on port 3000
 app.listen(PORT, function() {
   console.log("App running on port 3000!");
